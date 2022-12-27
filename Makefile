@@ -27,7 +27,7 @@ OBJECTS = \
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
 ##############################################
 
-C_OPT_FLAGS = -DNDEBUG -O3 -funroll-loops -pipe -fno-strict-aliasing -static
+C_OPT_FLAGS = -DNDEBUG -O3 -pipe -fno-strict-aliasing -flto
 C_DEBUG_FLAGS = -D_DEBUG -DDEBUG -g -ggdb3
 C_GCC4_FLAGS = -fvisibility=hidden
 CPP_GCC4_FLAGS = -fvisibility-inlines-hidden
@@ -39,13 +39,10 @@ METAMOD = $(MMSOURCE17)/core-legacy
 INCLUDE += -I. -I.. -Isdk -I../ \
 	-I$(METAMOD)/sourcehook -I$(SMSDK)/public -I$(SMSDK)/public/extensions \
 	-I$(SMSDK)/public/sourcepawn \
-	-I/opt/Source/lib/openssl/include \
 
 CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_ORANGEBOXVALVE=4 -DSE_LEFT4DEAD=5 -DSE_LEFT4DEAD2=6
 
-CFLAGS += -DCURL_STATIC_LIB
-
-LINK += -L./lib -Wl,-Bstatic -static -lcurl -lrt -lssh2 -lssl -lz -lstdc++ -Wl,-Bdynamic -shared -lcrypto
+LINK += -L/usr/lib -Wl,-Bstatic -static -lstdc++ -m32 -Wl,-Bdynamic -shared -lcrypto -lcurl -lz -lrt -lssl
 
 LINK += -m32 -ldl -lm
 
@@ -76,8 +73,6 @@ ifeq "$(OS)" "Darwin"
 	LINK += -dynamiclib
 	BINARY = $(PROJECT).ext.dylib
 else
-	LINK += -static-libgcc
-	#LINK += -shared
 	BINARY = $(PROJECT).ext.so
 endif
 
