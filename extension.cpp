@@ -1,6 +1,5 @@
 #include "extension.h"
 #include "curlmanager.h"
-#include "opensslmanager.h"
 #include <curl/curl.h>
 
 cURL_SM g_cURL_SM;
@@ -79,8 +78,6 @@ bool cURL_SM::SDK_OnLoad(char *error, size_t maxlength, bool late)
 
 	g_cURLManager.SDK_OnLoad();
 
-	g_OpensslManager.SDK_OnLoad();
-
 	return true;
 }
 
@@ -89,8 +86,6 @@ void cURL_SM::SDK_OnUnload()
 	shutdown = true;
 
 	g_cURLManager.SDK_OnUnload();
-
-	g_OpensslManager.SDK_OnUnload();
 
 	curl_global_cleanup();
 }

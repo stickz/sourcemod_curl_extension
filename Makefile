@@ -19,9 +19,7 @@ OBJECTS = \
 	extension.cpp 		\
 	curlmanager.cpp		\
 	curlthread.cpp 		\
-	natives.cpp 		\
-	opensslmanager.cpp 	\
-	opensslthread.cpp
+	natives.cpp
 
 ##############################################
 ### CONFIGURE ANY OTHER FLAGS/OPTIONS HERE ###
@@ -42,9 +40,7 @@ INCLUDE += -I. -I.. -Isdk -I../ \
 
 CFLAGS += -DSE_EPISODEONE=1 -DSE_DARKMESSIAH=2 -DSE_ORANGEBOX=3 -DSE_ORANGEBOXVALVE=4 -DSE_LEFT4DEAD=5 -DSE_LEFT4DEAD2=6
 
-LINK += -L/usr/lib -Wl,-Bstatic -static -lstdc++ -m32 -Wl,-Bdynamic -shared -lcrypto -lcurl -lz -lrt -lssl
-
-LINK += -m32 -ldl -lm
+LINK += -L/usr/lib -Wl,-Bstatic -m32 -static -lstdc++ -Wl,-Bdynamic -m32 -shared -lcurl
 
 CFLAGS += -D_LINUX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp -Wall -Wno-switch \
